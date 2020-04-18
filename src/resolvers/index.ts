@@ -1,5 +1,5 @@
 import { Resolvers, Post, User } from '../types';
-import uuidv4 from 'uuidv4'
+import { uuid } from 'uuidv4'
 
 const resolvers: Resolvers = {
   Query: {
@@ -16,33 +16,24 @@ const resolvers: Resolvers = {
       return models.post.findById(parseInt(id));
     },
   },
-  // Mutation: {
-  //   createPost: (parent, { title, userId }, { models }) => {
-  //     const id = uuidv4();
-  //     const post = {
-  //       id,
-  //       title,
-  //       userId,
-  //     };
 
-  //     models.posts[id] = post;
-  //     models.users[userId].messageIds.push(id);
+  Mutation: {
+    createPost: (parent, { post: { title, authorId } }, { models }) => {
+      return models.post.create({ title, authorId: parseInt(authorId) })
+    },
 
-  //     return post;
-  //   },
+    // deletePost: (parent, { id }, { models }) => {
+    //   const { [id]: post, ...otherposts } = models.posts;
 
-  //   deletePost: (parent, { id }, { models }) => {
-  //     const { [id]: post, ...otherposts } = models.posts;
+    //   if (!post) {
+    //     return false;
+    //   }
 
-  //     if (!post) {
-  //       return false;
-  //     }
+    //   // models.posts = otherposts;
 
-  //     models.posts = otherposts;
-
-  //     return true;
-  //   },
-  // },
+    //   return true;
+    // },
+  },
 
   User: {
     posts: (user: User, args, { models }) => {

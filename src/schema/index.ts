@@ -20,4 +20,13 @@ export default gql`
     name: String!
     posts: [Post!]
   }
+
+  input PostInput {
+    title: String!
+    authorId: ID!
+  }
+
+  type Mutation {
+    createPost(post: PostInput!): Post
+  }
 `;
