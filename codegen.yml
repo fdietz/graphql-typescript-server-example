@@ -2,5 +2,9 @@
 schema: src/schema/index.ts
 generates:
   ./src/types.d.ts:
+    config: 
+      defaultMapper: any
+      contextType: ./#Context
     plugins:
       - typescript
+      - typescript-resolvers

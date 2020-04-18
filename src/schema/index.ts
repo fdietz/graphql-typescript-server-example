@@ -10,7 +10,8 @@ export default gql`
 
   type Post {
     id: ID!
-    name: String!
+    title: String!
+    authorId: ID!
     author: User!
   }
 
